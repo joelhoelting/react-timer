@@ -1,13 +1,12 @@
 import React from 'react';
 
-import './TopController.css';
+import './PomodoroController.css';
 
-const TopController = (props) => {
+const PomodoroController = (props) => {
   const { setPomodoro, setShortBreak, setLongBreak } = props;
-  debugger
 
   return (
-    <div className="topController">
+    <div className="pomodoroController">
       <button onClick={setPomodoro}>Pomodoro</button>
       <button onClick={setShortBreak}>Short Break</button>
       <button onClick={setLongBreak}>Long Break</button>
@@ -16,4 +15,4 @@ const TopController = (props) => {
 };
 
 
-export default TopController;
+export default PomodoroController;
