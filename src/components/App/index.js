@@ -29,6 +29,18 @@ class App extends Component {
     alert('Set Long Break!');
   }
 
+  startTimer() {
+    alert('Timer Started!');
+  }
+
+  stopTimer() {
+    alert('Timer Stopped!');
+  }
+
+  resetTimer() {
+    alert('Timer Reset!');
+  }
+
   render() {
     return (
       <div className="container">
@@ -37,6 +49,9 @@ class App extends Component {
           setPomodoro={this.setPomodoro}
           setShortBreak={this.setShortBreak}
           setLongBreak={this.setLongBreak}
+          startTimer={this.startTimer}
+          stopTimer={this.stopTimer}
+          resetTimer={this.resetTimer}
         />
       </div>
     );

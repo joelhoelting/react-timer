@@ -1,6 +1,19 @@
 header {
+  background: red;
   display: flex;
   justify-content: space-between;
   padding: 10px;
-  background: red;
+
+  button {
+    &:hover {
+      img {
+        animation: gear-spin infinite 2s linear;
+      }
+    }
+  }
+}
+
+@keyframes gear-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
