@@ -1,29 +1,18 @@
 import React, { Component } from 'react';
-import Modal from 'react-modal';
 
 // Import Components
 import Header from '../Header';
 import TimerWindow from '../TimerWindow';
+import SettingsModal from '../SettingsModal';
 
 import './App.css';
-
-const customStyles = {
-  content : {
-    top                   : '50%',
-    left                  : '50%',
-    right                 : 'auto',
-    bottom                : 'auto',
-    marginRight           : '-50%',
-    transform             : 'translate(-50%, -50%)'
-  }
-};
 
 class App extends Component {
   constructor() {
     super();
 
     this.state = {
-      'modalIsOpen': false,
+      'isModalOpen': false,
       'timer': 25,
       'settings': {
         'pomodoro': 25,
@@ -32,21 +21,24 @@ class App extends Component {
       }
     };
 
-    this.openSettings = this.openSettings.bind(this);
     this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
   }
 
   openModal() {
-    this.setState({modalIsOpen: true});
+    this.setState({ isModalOpen: true });
   }
 
   closeModal() {
-    this.setState({modalIsOpen: false});
+    this.setState({ isModalOpen: false });
   }
 
   openSettings() {
-    alert('Settings Opened');
+    alert('Settings Open!');
+  }
+
+  closeSettings() {
+    alert('Settings Closed!');
   }
 
   setPomodoro() {
@@ -86,25 +78,11 @@ class App extends Component {
           stopTimer={this.stopTimer}
           resetTimer={this.resetTimer}
         />
-        <Modal
-          isOpen={this.state.modalIsOpen}
-          onAfterOpen={this.afterOpenModal}
-          onRequestClose={this.closeModal}
-          style={customStyles}
-          contentLabel="Example Modal"
-        >
-
-          <h2 ref={subtitle => this.subtitle = subtitle}>Hello</h2>
-          <button onClick={this.closeModal}>close</button>
-          <div>I am a modal</div>
-          <form>
-            <input />
-            <button>tab navigation</button>
-            <button>stays</button>
-            <button>inside</button>
-            <button>the modal</button>
-          </form>
-        </Modal>
+        <SettingsModal
+          isOpen={this.state.isModalOpen}
+          closeModal={this.closeModal}
+          transitionName="modal-animate"
+        />
       </div>
     );
   }

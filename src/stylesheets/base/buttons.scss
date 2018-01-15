@@ -1,4 +1,5 @@
 button {
+  &:hover {cursor: pointer}
   &:active {outline: 0}
   &:focus {outline: 0}
 }
