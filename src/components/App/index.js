@@ -10,6 +10,15 @@ class App extends Component {
   constructor() {
     super();
 
+    this.state = {
+      'timer': 25,
+      'settings': {
+        'pomodoro': 25,
+        'short': 5,
+        'long': 10
+      }
+    };
+
     this.openSettings = this.openSettings.bind(this);
   }
 
@@ -49,6 +58,7 @@ class App extends Component {
           setPomodoro={this.setPomodoro}
           setShortBreak={this.setShortBreak}
           setLongBreak={this.setLongBreak}
+          timer={this.state.timer}
           startTimer={this.startTimer}
           stopTimer={this.stopTimer}
           resetTimer={this.resetTimer}

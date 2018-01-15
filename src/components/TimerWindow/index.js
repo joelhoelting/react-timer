@@ -5,7 +5,7 @@ import Timer from './Timer';
 import TimerController from './TimerController';
 
 const TimerWindow = (props) => {
-  const { setPomodoro, setShortBreak, setLongBreak, startTimer, stopTimer, resetTimer } = props;
+  const { setPomodoro, setShortBreak, setLongBreak, startTimer, stopTimer, resetTimer, timer } = props;
 
   return (
     <div className="timerWindow">
@@ -14,7 +14,7 @@ const TimerWindow = (props) => {
         setShortBreak={setShortBreak}
         setLongBreak={setLongBreak}
       />
-      <Timer />
+      <Timer timer={props.timer}/>
       <TimerController
         startTimer={startTimer}
         stopTimer={stopTimer}
