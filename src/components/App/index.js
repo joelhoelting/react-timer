@@ -82,6 +82,7 @@ class App extends Component {
           isOpen={this.state.isModalOpen}
           closeModal={this.closeModal}
           transitionName="modal-animate"
+          state={this.state}
         />
       </div>
     );
