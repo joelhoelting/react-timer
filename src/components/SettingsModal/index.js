@@ -3,10 +3,9 @@ import CSSTransitionGroup from 'react-addons-css-transition-group';
 
 import './SettingsModal.css';
 
-// Import Audio Files
-import sound1 from 'sounds/sound1.mp3';
-
 const SettingsModal = (props) => {
+
+  // Settings Dispatcher
 
   function saveSettings(event) {
     event.preventDefault();
@@ -15,23 +14,32 @@ const SettingsModal = (props) => {
     // props.saveSettings();
   }
 
+  function selectSound(event) {
+    const volume = parseInt(props.state.settings.volume);
+    props.playSound(event.target.value, volume);
+  }
+
+  function changeVolume(event) {
+    props.changeVolume(event.target.value);
+  }
+
   const styles = {
     modal: {
+      // Flexbox - Center Modal
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
       position: 'fixed',
-      /* Stay in place */
+      /* Stay in Place */
       zIndex: 1,
-      /* Sit on top */
+      /* Sit on Top */
       left: 0,
       top: 0,
       width: '100%',
-      /* Full width */
+      /* Full Width */
       height: '100%',
-      /* Full height */
+      /* Full Height */
       overflow: 'none',
-      /* Enable scroll if needed */
       backgroundColor: 'rgba(0, 0, 0, 0.4)'
     },
     modalContainer: {
@@ -66,18 +74,25 @@ const SettingsModal = (props) => {
             <button style={closeButton} onClick={props.closeModal}>&#10005;</button>
             <form action="" className="settings" onSubmit={(event) => saveSettings(event)}>
               <h3>Pick Alert Sound</h3>
-              <select style={select} size="4" ref={(input) => { this.alert = input}}>
-                <option value="1">Option 1</option>
-                <option value="2">Option 2</option>
-                <option value="3">Option 3</option>
-                <option value="4">Option 4</option>
+              <select id="alert" style={select} size="5" onChange={(event) => selectSound(event)}>
+                <option value="alarm_clock">Alarm Clock</option>
+                <option value="applause_cheers">Applause & Cheers</option>
+                <option value="foghorn_barge">Foghorn Barge</option>
+                <option value="old_bell">Old Bell</option>
+                <option value="ship_brass">Ship Brass</option>
               </select>
               <h3>Volume</h3>
-              <select style={select} size="4" ref={(input) => { this.volume = input}}>
-                <option value="1">25%</option>
-                <option value="2">50%</option>
-                <option value="3">75%</option>
-                <option value="4">100%</option>
+              <select id="volume" defaultValue={props.state.settings.volume} style={select} size="10" onChange={(event) => changeVolume(event)}>
+                <option value="1">10%</option>
+                <option value="2">20%</option>
+                <option value="3">30%</option>
+                <option value="4">40%</option>
+                <option value="5">50%</option>
+                <option value="6">60%</option>
+                <option value="7">70%</option>
+                <option value="8">80%</option>
+                <option value="9">90%</option>
+                <option value="10">100%</option>
               </select>
               <h3>Set Custom Times (in minutes)</h3>
               <label>Pomodoro</label>

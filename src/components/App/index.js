@@ -4,7 +4,9 @@ import React, { Component } from 'react';
 import Header from '../Header';
 import TimerWindow from '../TimerWindow';
 import SettingsModal from '../SettingsModal';
+import AudioFiles from '../AudioFiles';
 
+// Import Global Stylesheet
 import './App.css';
 
 class App extends Component {
@@ -17,14 +19,19 @@ class App extends Component {
       'settings': {
         'pomodoro': 25,
         'short': 5,
-        'long': 10
+        'long': 10,
+        'volume': 10
       }
     };
 
+    // This Bindings
     this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
+    this.playSound = this.playSound.bind(this);
+    this.changeVolume = this.changeVolume.bind(this);
   }
 
+  // Open Close Modal
   openModal() {
     this.setState({ isModalOpen: true });
   }
@@ -33,29 +40,34 @@ class App extends Component {
     this.setState({ isModalOpen: false });
   }
 
-  openSettings() {
-    alert('Settings Open!');
+  // Sound Functions
+  playSound(fileName, volume) {
+    const soundArray = Array.from(document.querySelectorAll('audio'));
+    for (var i = 0; i < soundArray.length; i++) {
+      soundArray[i].pause();
+    }
+    const sound = soundArray.find(sound => sound.src.includes(fileName));
+    sound.volume = volume / 10;
+    sound.play();
   }
 
-  closeSettings() {
-    alert('Settings Closed!');
+  changeVolume(volume) {
+    this.setState({
+      settings: {
+        ...this.state.settings,
+        volume: volume
+      }
+    });
   }
 
-  setPomodoro() {
-    alert('Set Pomodoro!');
-  }
-
-  setShortBreak() {
-    alert('Set Short Break!');
-  }
-
-  setLongBreak() {
-    alert('Set Long Break!');
+  setTimer() {
+    alert('Start Timer!');
   }
 
   startTimer() {
-    alert('Timer Started!');
+    alert('Set Pomodoro!');
   }
+
 
   stopTimer() {
     alert('Timer Stopped!');
@@ -81,9 +93,12 @@ class App extends Component {
         <SettingsModal
           isOpen={this.state.isModalOpen}
           closeModal={this.closeModal}
+          playSound={this.playSound}
+          changeVolume={this.changeVolume}
           transitionName="modal-animate"
           state={this.state}
         />
+        <AudioFiles />
       </div>
     );
   }
