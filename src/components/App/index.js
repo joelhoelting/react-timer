@@ -52,10 +52,11 @@ class App extends Component {
   }
 
   changeVolume(volume) {
+    var newVolume = parseInt(volume);
     this.setState({
       settings: {
         ...this.state.settings,
-        volume: volume
+        volume: newVolume
       }
     });
   }
