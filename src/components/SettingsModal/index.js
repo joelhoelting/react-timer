@@ -5,21 +5,11 @@ import './SettingsModal.css';
 
 const SettingsModal = (props) => {
 
-  // Settings Dispatcher
-
-  function saveSettings(event) {
-    event.preventDefault();
-
-    console.log('state will be saved');
-    // props.saveSettings();
-  }
-
   function selectSound(event) {
-    const volume = parseInt(props.state.settings.volume);
-    props.playSound(event.target.value, volume);
+    props.changeSound(event.target.value);
   }
 
-  function changeVolume(event) {
+  function selectVolume(event) {
     props.changeVolume(event.target.value);
   }
 
@@ -72,38 +62,35 @@ const SettingsModal = (props) => {
         <div className="modal" style={modal}>
           <div className="modal-container" style={modalContainer}>
             <button style={closeButton} onClick={props.closeModal}>&#10005;</button>
-            <form action="" className="settings" onSubmit={(event) => saveSettings(event)}>
-              <h3>Pick Alert Sound</h3>
-              <select id="alert" style={select} size="5" onChange={(event) => selectSound(event)}>
-                <option value="alarm_clock">Alarm Clock</option>
-                <option value="applause_cheers">Applause & Cheers</option>
-                <option value="foghorn_barge">Foghorn Barge</option>
-                <option value="old_bell">Old Bell</option>
-                <option value="ship_brass">Ship Brass</option>
-              </select>
-              <h3>Volume</h3>
-              <select id="volume" defaultValue={props.state.settings.volume} style={select} size="10" onChange={(event) => changeVolume(event)}>
-                <option value="1">10%</option>
-                <option value="2">20%</option>
-                <option value="3">30%</option>
-                <option value="4">40%</option>
-                <option value="5">50%</option>
-                <option value="6">60%</option>
-                <option value="7">70%</option>
-                <option value="8">80%</option>
-                <option value="9">90%</option>
-                <option value="10">100%</option>
-              </select>
-              <h3>Set Custom Times (in minutes)</h3>
-              <label>Pomodoro</label>
-              <input style={input} step="1" min="1" name="pomodoro" type="number" defaultValue={pomodoro} />
-              <label>Short Break</label>
-              <input style={input} step="1" min="1" name="long" type="number" defaultValue={short} />
-              <label>Long Break</label>
-              <input style={input} step="1" min="1" name="short" type="number" defaultValue={long} />
-              <button type="submit">Save</button>
-              <button>Reset</button>
-            </form>
+            <h3>Pick Alert Sound</h3>
+            <select id="alert" defaultValue={props.state.settings.alert} style={select} size="5" onChange={(event) => selectSound(event)}>
+              <option value="alarm_clock">Alarm Clock</option>
+              <option value="applause_cheers">Applause & Cheers</option>
+              <option value="foghorn_barge">Foghorn Barge</option>
+              <option value="old_bell">Old Bell</option>
+              <option value="ship_brass">Ship Brass</option>
+            </select>
+            <h3>Volume</h3>
+            <select id="volume" defaultValue={props.state.settings.volume} style={select} size="10" onChange={(event) => selectVolume(event)}>
+              <option value="1">10%</option>
+              <option value="2">20%</option>
+              <option value="3">30%</option>
+              <option value="4">40%</option>
+              <option value="5">50%</option>
+              <option value="6">60%</option>
+              <option value="7">70%</option>
+              <option value="8">80%</option>
+              <option value="9">90%</option>
+              <option value="10">100%</option>
+            </select>
+            <h3>Set Custom Times (in minutes)</h3>
+            <label>Pomodoro</label>
+            <input style={input} step="1" min="1" name="pomodoro" type="number" defaultValue={pomodoro} />
+            <label>Short Break</label>
+            <input style={input} step="1" min="1" name="long" type="number" defaultValue={short} />
+            <label>Long Break</label>
+            <input style={input} step="1" min="1" name="short" type="number" defaultValue={long} />
+            <button>Set Defaults</button>
           </div>
         </div>
       </CSSTransitionGroup>
