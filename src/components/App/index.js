@@ -17,7 +17,7 @@ class App extends Component {
     super();
 
     this.state = {
-      isModalOpen: false,
+      isSettingsModalOpen: false,
       timer: 25,
       settings: {
         pomodoro: 25,
@@ -34,6 +34,7 @@ class App extends Component {
     this.changeSound = this.changeSound.bind(this);
     this.changeVolume = this.changeVolume.bind(this);
     this.changeTimerSettings = this.changeTimerSettings.bind(this);
+    this.setTimer = this.setTimer.bind(this);
   }
 
   //
@@ -117,40 +118,47 @@ class App extends Component {
   }
 
   changeTimerSettings(setting, value) {
+    // Set State After User Changes Timer Settings
     this.setState({
       settings: {
         ...this.state.settings,
         [setting]: value
       }
     });
+    // Persist Timer Setting to LocalStorage
+    localStorage.setItem(setting, value);
   }
 
-  setPomodoro() {
-    alert('Start Timer!');
-  }
-
-  setShortBreak() {
-    alert('Start Timer!');
-  }
-
-  setLongBreak() {
-    alert('Start Timer!');
-  }
-
-  setTimer() {
-    alert('Start Timer!');
+  setTimer(selection) {
+    let time;
+    switch (selection) {
+    case 'pomodoro':
+      time = this.state.settings.pomodoro;
+      break;
+    case 'short':
+      time = this.state.settings.short;
+      break;
+    case 'long':
+      time = this.state.settings.long;
+      break;
+    default:
+      break;
+    }
+    this.setState({
+      timer: time
+    });
   }
 
   startTimer() {
-    alert('Set Pomodoro!');
+    alert('Start Timer!');
   }
 
   stopTimer() {
-    alert('Timer Stopped!');
+    alert('Stopped Timer!');
   }
 
   resetTimer() {
-    alert('Timer Reset!');
+    alert('Reset Timer!');
   }
 
   render() {
@@ -158,9 +166,7 @@ class App extends Component {
       <div className="container">
         <Header openSettings={this.openSettingsModal} />
         <TimerWindow
-          setPomodoro={this.setPomodoro}
-          setShortBreak={this.setShortBreak}
-          setLongBreak={this.setLongBreak}
+          setTimer={this.setTimer}
           timer={this.state.timer}
           startTimer={this.startTimer}
           stopTimer={this.stopTimer}

@@ -57,11 +57,11 @@ const Settings = (props) => {
       </select>
       <h3>Set Custom Times (in minutes)</h3>
       <label>Pomodoro</label>
-      <input style={input} step="1" min="1" max="60" name="pomodoro" type="number" defaultValue={pomodoro} onChange={(event) => setTimerSettings(event)} />
+      <input style={input} step="1" min="1" name="pomodoro" type="number" defaultValue={pomodoro} onChange={(event) => setTimerSettings(event)} />
       <label>Short Break</label>
-      <input style={input} step="1" min="1" name="long" type="number" defaultValue={short} onChange={(event) => setTimerSettings(event)} />
+      <input style={input} step="1" min="1" name="short" type="number" defaultValue={short} onChange={(event) => setTimerSettings(event)} />
       <label>Long Break</label>
-      <input style={input} step="1" min="1" name="short" type="number" defaultValue={long} onChange={(event) => setTimerSettings(event)} />
+      <input style={input} step="1" min="1" name="long" type="number" defaultValue={long} onChange={(event) => setTimerSettings(event)} />
       <button>Set Defaults</button>
     </div>
   );

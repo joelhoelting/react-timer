@@ -3,13 +3,16 @@ import React from 'react';
 import './PomodoroController.css';
 
 const PomodoroController = (props) => {
-  const { setPomodoro, setShortBreak, setLongBreak } = props;
+  function handleChange(event) {
+    const selection = event.target.name;
+    props.setTimer(selection);
+  }
 
   return (
     <div className="pomodoroController">
-      <button onClick={setPomodoro}>Pomodoro</button>
-      <button onClick={setShortBreak}>Short Break</button>
-      <button onClick={setLongBreak}>Long Break</button>
+      <button name="pomodoro" onClick={(event) => handleChange(event)}>Pomodoro</button>
+      <button name="short" onClick={(event) => handleChange(event)}>Short Break</button>
+      <button name="long" onClick={(event) => handleChange(event)}>Long Break</button>
     </div>
   );
 };
