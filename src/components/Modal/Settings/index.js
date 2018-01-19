@@ -1,5 +1,7 @@
 import React from 'react';
 
+import './Settings.css';
+
 const Settings = (props) => {
 
   function setSound(event) {
@@ -16,26 +18,16 @@ const Settings = (props) => {
     props.changeTimerSettings(setting, value);
   }
 
-  const styles = {
-    select: {
-      width: '100%'
-    },
-    input: {
-      width: '50px'
-    },
-    closeButton: {
-      float: 'right'
-    }
-  };
+  function setDefaults() {
+    props.setDefaults();
+  }
 
-  const { pomodoro, long, short } = props.state.settings;
-  const { select, input } = styles;
+  const { pomodoro, long, short, volume, alert } = props.state.settings;
 
   return (
     <div>
-
       <h3>Pick Alert Sound</h3>
-      <select id="alert" defaultValue={props.state.settings.alert} style={select} size="5" onChange={(event) => setSound(event)}>
+      <select id="alert" value={alert} size="5" onChange={(event) => setSound(event)}>
         <option value="alarm_clock">Alarm Clock</option>
         <option value="applause_cheers">Applause & Cheers</option>
         <option value="foghorn_barge">Foghorn Barge</option>
@@ -43,7 +35,7 @@ const Settings = (props) => {
         <option value="ship_brass">Ship Brass</option>
       </select>
       <h3>Volume</h3>
-      <select id="volume" defaultValue={props.state.settings.volume} style={select} size="10" onChange={(event) => setVolume(event)}>
+      <select id="volume" value={volume} size="10" onChange={(event) => setVolume(event)}>
         <option value="1">10%</option>
         <option value="2">20%</option>
         <option value="3">30%</option>
@@ -57,12 +49,12 @@ const Settings = (props) => {
       </select>
       <h3>Set Custom Times (in minutes)</h3>
       <label>Pomodoro</label>
-      <input style={input} step="1" min="1" name="pomodoro" type="number" defaultValue={pomodoro} onChange={(event) => setTimerSettings(event)} />
+      <input step="1" min="1" name="pomodoro" type="number" value={pomodoro} onChange={(event) => setTimerSettings(event)} />
       <label>Short Break</label>
-      <input style={input} step="1" min="1" name="short" type="number" defaultValue={short} onChange={(event) => setTimerSettings(event)} />
+      <input step="1" min="1" name="short" type="number" value={short} onChange={(event) => setTimerSettings(event)} />
       <label>Long Break</label>
-      <input style={input} step="1" min="1" name="long" type="number" defaultValue={long} onChange={(event) => setTimerSettings(event)} />
-      <button>Set Defaults</button>
+      <input step="1" min="1" name="long" type="number" value={long} onChange={(event) => setTimerSettings(event)} />
+      <button onClick={() => setDefaults()} >Set Defaults</button>
     </div>
   );
 };

@@ -9,7 +9,7 @@ import Modal from '../Modal';
 import Settings from '../Modal/Settings';
 import AudioFiles from '../AudioFiles';
 
-// Import Global Stylesheet
+// Import CSS
 import './App.css';
 
 class App extends Component {
@@ -40,6 +40,7 @@ class App extends Component {
     this.changeVolume = this.changeVolume.bind(this);
     this.changeTimerSettings = this.changeTimerSettings.bind(this);
     this.setTimer = this.setTimer.bind(this);
+    this.setDefaults = this.setDefaults.bind(this);
   }
 
   //
@@ -152,6 +153,23 @@ class App extends Component {
     localStorage.setItem(setting, minutes);
   }
 
+  setDefaults() {
+    this.setState({
+      timer: {
+        minutes: 25,
+        seconds: 0,
+        remainingSeconds: 1500
+      },
+      settings: {
+        pomodoro: 25,
+        short: 5,
+        long: 10,
+        alert: 'alarm_clock',
+        volume: 5
+      }
+    });
+  }
+
   // Method to Update State for ActiveMode(Pomodoro, Short, Long) and Displayed Timer
   setTimer(selection) {
     // Case Statement -- Set Timer to Match State.Settings Based on Which Button is Clicked (Pomodoro/Short/Long)
@@ -192,7 +210,7 @@ class App extends Component {
   }
 
   resetTimer() {
-    alert('Reset Timer!');
+    alert('Reset Timer');
   }
 
   render() {
@@ -215,6 +233,7 @@ class App extends Component {
             changeSound={this.changeSound}
             changeVolume={this.changeVolume}
             changeTimerSettings={this.changeTimerSettings}
+            setDefaults={this.setDefaults}
             state={this.state}
           />
         </Modal>
