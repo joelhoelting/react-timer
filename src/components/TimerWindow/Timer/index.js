@@ -3,10 +3,10 @@ import React from 'react';
 import './Timer.css';
 
 const Timer = (props) => {
-  const {timer} = props;
+  const {time} = props;
   return (
     <div className="timer">
-      <h1>{timer.minutes}:{timer.seconds}</h1>
+      <h1>{time.minutes}:{time.seconds}</h1>
     </div>
   );
 };

@@ -19,7 +19,7 @@ class App extends Component {
     this.state = {
       isSettingsModalOpen: false,
       activeMode: 'pomodoro',
-      timer: {
+      time: {
         minutes: 25,
         seconds: 0,
         remainingSeconds: 1500
@@ -33,6 +33,8 @@ class App extends Component {
       }
     };
 
+    // Global Variables
+
     // This Bindings
     this.openSettingsModal = this.openSettingsModal.bind(this);
     this.closeSettingsModal = this.closeSettingsModal.bind(this);
@@ -41,6 +43,9 @@ class App extends Component {
     this.changeTimerSettings = this.changeTimerSettings.bind(this);
     this.setTimer = this.setTimer.bind(this);
     this.setDefaults = this.setDefaults.bind(this);
+
+    this.startTimer = this.startTimer.bind(this);
+    this.countDown = this.countDown.bind(this);
   }
 
   //
@@ -49,8 +54,8 @@ class App extends Component {
     // Will Not Run First Time Page is Loaded
     if (localStorage.length > 0) {
       this.setState({
-        timer: {
-          ...this.state.timer,
+        time: {
+          ...this.state.time,
           minutes: parseInt(localStorage.pomodoro, 10),
           remainingSeconds: (parseInt(localStorage.pomodoro, 10) * 60)
         },
@@ -141,7 +146,7 @@ class App extends Component {
     // Update Timer if Setting Being Changed (Pomodoro, Short, Long) === ActiveMode (Pomodoro, Short, Long)
     if (setting === this.state.activeMode) {
       this.setState({
-        timer: {
+        time: {
           seconds: 0,
           minutes: parseInt(minutes, 10),
           remainingSeconds: (parseInt(minutes, 10) * 60)
@@ -155,7 +160,7 @@ class App extends Component {
 
   setDefaults() {
     this.setState({
-      timer: {
+      time: {
         minutes: 25,
         seconds: 0,
         remainingSeconds: 1500
@@ -193,16 +198,38 @@ class App extends Component {
 
     // Always Update Timer When User Changes ActiveMode(Pomodoro, Short, Long)
     this.setState({
-      timer: {
-        ...this.state.timer,
+      time: {
+        ...this.state.time,
         remainingSeconds: (time * 60),
         minutes: time
       }
     });
   }
 
+  secondsToTime(secs){
+    let minutes = Math.floor(secs / 60);
+    let seconds = Math.ceil(secs % 60);
+
+    let obj = {
+      minutes,
+      seconds
+    };
+    return obj;
+  }
+
+  countDown() {
+    // Remove one second, set state so a re-render happens.
+    let seconds = this.state.time.remainingSeconds - 1;
+    let timeObject = this.secondsToTime(seconds);
+    timeObject.remainingSeconds = seconds;
+
+    this.setState({
+      time: timeObject
+    });
+  }
+
   startTimer() {
-    alert('Start Timer!');
+    setInterval(this.countDown, 1000);
   }
 
   stopTimer() {
@@ -219,7 +246,7 @@ class App extends Component {
         <Header openSettings={this.openSettingsModal} />
         <TimerWindow
           setTimer={this.setTimer}
-          timer={this.state.timer}
+          time={this.state.time}
           startTimer={this.startTimer}
           stopTimer={this.stopTimer}
           resetTimer={this.resetTimer}

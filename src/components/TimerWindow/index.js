@@ -10,7 +10,7 @@ const TimerWindow = (props) => {
     startTimer,
     stopTimer,
     resetTimer,
-    timer
+    time
   } = props;
 
   return (
@@ -18,7 +18,7 @@ const TimerWindow = (props) => {
       <PomodoroController
         setTimer={setTimer}
       />
-      <Timer timer={timer}/>
+      <Timer time={time}/>
       <TimerController
         startTimer={startTimer}
         stopTimer={stopTimer}
