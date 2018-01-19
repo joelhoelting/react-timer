@@ -18,9 +18,11 @@ class App extends Component {
 
     this.state = {
       isSettingsModalOpen: false,
+      activeMode: 'pomodoro',
       timer: {
         minutes: 25,
         seconds: 0,
+        remainingSeconds: 1500
       },
       settings: {
         pomodoro: 25,
@@ -46,13 +48,18 @@ class App extends Component {
     // Will Not Run First Time Page is Loaded
     if (localStorage.length > 0) {
       this.setState({
+        timer: {
+          ...this.state.timer,
+          minutes: parseInt(localStorage.pomodoro, 10),
+          remainingSeconds: (parseInt(localStorage.pomodoro, 10) * 60)
+        },
         settings: {
           pomodoro: parseInt(localStorage.pomodoro, 10),
           short: parseInt(localStorage.short, 10),
           long: parseInt(localStorage.long, 10),
           alert: localStorage.alert,
           volume: parseInt(localStorage.volume, 10)
-        }
+        },
       });
     }
   }
@@ -60,7 +67,6 @@ class App extends Component {
   // After Component Mounts Set Local Storage to Default State
   componentDidMount() {
     const settings = this.state.settings;
-
     for (var key in settings) {
       if (settings.hasOwnProperty(key)) {
         localStorage.setItem(key, settings[key]);
@@ -68,17 +74,18 @@ class App extends Component {
     }
   }
 
-  // Open Close Modal
+  // Open Settings Modal
   openSettingsModal() {
     this.setState({ isSettingsModalOpen: true });
   }
 
+  // Close Settings Modal
   closeSettingsModal() {
     this.setState({ isSettingsModalOpen: false });
   }
 
   // Sound Functions
-
+  // Finds HTML5 Audio Element in the DOM and Plays It (Two Parameters: Alert Name, Volume)
   playSound(alertName, volume) {
     const soundArray = Array.from(document.querySelectorAll('audio'));
     // Audio Pauses When Selecting Another Alert
@@ -120,36 +127,57 @@ class App extends Component {
     this.playSound(this.state.settings.alert, newVolume);
   }
 
-  changeTimerSettings(setting, value) {
+  changeTimerSettings(setting, minutes) {
+
     // Set State After User Changes Timer Settings
     this.setState({
       settings: {
         ...this.state.settings,
-        [setting]: value
+        [setting]: minutes
       }
     });
+
+    // Update Timer if Setting Being Changed (Pomodoro, Short, Long) === ActiveMode (Pomodoro, Short, Long)
+    if (setting === this.state.activeMode) {
+      this.setState({
+        timer: {
+          seconds: 0,
+          minutes: parseInt(minutes, 10),
+          remainingSeconds: (parseInt(minutes, 10) * 60)
+        }
+      });
+    }
+
     // Persist Timer Setting to LocalStorage
-    localStorage.setItem(setting, value);
+    localStorage.setItem(setting, minutes);
   }
 
+  // Method to Update State for ActiveMode(Pomodoro, Short, Long) and Displayed Timer
   setTimer(selection) {
+    // Case Statement -- Set Timer to Match State.Settings Based on Which Button is Clicked (Pomodoro/Short/Long)
     let time;
     switch (selection) {
     case 'pomodoro':
       time = this.state.settings.pomodoro;
+      this.setState({ activeMode: selection});
       break;
     case 'short':
       time = this.state.settings.short;
+      this.setState({ activeMode: selection});
       break;
     case 'long':
       time = this.state.settings.long;
+      this.setState({ activeMode: selection});
       break;
     default:
       break;
     }
+
+    // Always Update Timer When User Changes ActiveMode(Pomodoro, Short, Long)
     this.setState({
       timer: {
         ...this.state.timer,
+        remainingSeconds: (time * 60),
         minutes: time
       }
     });
