@@ -6,7 +6,7 @@ const Timer = (props) => {
   const {timer} = props;
   return (
     <div className="timer">
-      <h1>{timer}:00</h1>
+      <h1>{timer.minutes}:{timer.seconds}</h1>
     </div>
   );
 };

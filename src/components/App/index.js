@@ -18,7 +18,10 @@ class App extends Component {
 
     this.state = {
       isSettingsModalOpen: false,
-      timer: 25,
+      timer: {
+        minutes: 25,
+        seconds: 0,
+      },
       settings: {
         pomodoro: 25,
         short: 5,
@@ -145,7 +148,10 @@ class App extends Component {
       break;
     }
     this.setState({
-      timer: time
+      timer: {
+        ...this.state.timer,
+        minutes: time
+      }
     });
   }
 
