@@ -16,7 +16,7 @@ class App extends Component {
   constructor() {
     super();
 
-    this.state = {
+    this.defaultValues = {
       isSettingsModalOpen: false,
       activeMode: 'pomodoro',
       time: {
@@ -33,7 +33,12 @@ class App extends Component {
       }
     };
 
+    // Default State
+    this.state = this.defaultValues;
+
     // Global Variables
+    this.timer = 0;
+
 
     // This Bindings
     this.openSettingsModal = this.openSettingsModal.bind(this);
@@ -43,8 +48,8 @@ class App extends Component {
     this.changeTimerSettings = this.changeTimerSettings.bind(this);
     this.setTimer = this.setTimer.bind(this);
     this.setDefaults = this.setDefaults.bind(this);
-
     this.startTimer = this.startTimer.bind(this);
+    this.stopTimer = this.stopTimer.bind(this);
     this.countDown = this.countDown.bind(this);
   }
 
@@ -159,20 +164,9 @@ class App extends Component {
   }
 
   setDefaults() {
-    this.setState({
-      time: {
-        minutes: 25,
-        seconds: 0,
-        remainingSeconds: 1500
-      },
-      settings: {
-        pomodoro: 25,
-        short: 5,
-        long: 10,
-        alert: 'alarm_clock',
-        volume: 5
-      }
-    });
+    const defaults = this.defaultValues;
+    defaults.isSettingsModalOpen = true;
+    this.setState(defaults);
   }
 
   // Method to Update State for ActiveMode(Pomodoro, Short, Long) and Displayed Timer
@@ -196,7 +190,7 @@ class App extends Component {
       break;
     }
 
-    // Always Update Timer When User Changes ActiveMode(Pomodoro, Short, Long)
+    // Always Update Timer When User Changes ActiveMode( Pomodoro, Short, Long )
     this.setState({
       time: {
         ...this.state.time,
@@ -206,6 +200,9 @@ class App extends Component {
     });
   }
 
+  // Timer Functions
+
+  // Returns an Object w/ Minutes and Seconds Based on Remaining Seconds
   secondsToTime(secs){
     let minutes = Math.floor(secs / 60);
     let seconds = Math.ceil(secs % 60);
@@ -217,23 +214,39 @@ class App extends Component {
     return obj;
   }
 
+  // Decrements Remaining Seconds by 1 Each Time It's Executed
   countDown() {
-    // Remove one second, set state so a re-render happens.
     let seconds = this.state.time.remainingSeconds - 1;
     let timeObject = this.secondsToTime(seconds);
     timeObject.remainingSeconds = seconds;
 
+    // Timer Gets Updated w/ Remaining Minutes, Seconds, Total Seconds Remaining
     this.setState({
       time: timeObject
     });
+
+    // Stop Timer If 0 Seconds Left
+    if (seconds === 0) {
+      clearInterval(this.timer);
+      this.timer = 0;
+    }
   }
 
+  // Start Timer
   startTimer() {
-    setInterval(this.countDown, 1000);
+    // Timer Only Starts if setInterval Isn't Active
+    if (this.timer === 0) {
+      // this.timer gets set to an interval object
+      this.timer = setInterval(this.countDown, 1000);
+    }
   }
 
+  // Stop Timer
   stopTimer() {
-    alert('Stopped Timer!');
+    if (this.timer !== 0) {
+      clearInterval(this.timer);
+      this.timer = 0;
+    }
   }
 
   resetTimer() {
@@ -250,6 +263,7 @@ class App extends Component {
           startTimer={this.startTimer}
           stopTimer={this.stopTimer}
           resetTimer={this.resetTimer}
+          activeMode={this.state.activeMode}
         />
         <Modal
           isOpen={this.state.isSettingsModalOpen}

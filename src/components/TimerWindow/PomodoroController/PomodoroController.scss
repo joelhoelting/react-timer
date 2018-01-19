@@ -4,5 +4,8 @@
   background: aqua;
   button {
     width: 33%;
+    &.active {
+      background: red;
+    }
   }
 }

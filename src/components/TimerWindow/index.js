@@ -6,6 +6,7 @@ import TimerController from './TimerController';
 
 const TimerWindow = (props) => {
   const {
+    activeMode,
     setTimer,
     startTimer,
     stopTimer,
@@ -16,6 +17,7 @@ const TimerWindow = (props) => {
   return (
     <div className="timerWindow">
       <PomodoroController
+        activeMode={activeMode}
         setTimer={setTimer}
       />
       <Timer time={time}/>
