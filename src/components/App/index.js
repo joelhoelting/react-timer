@@ -2,8 +2,11 @@ import React, { Component } from 'react';
 
 // Import Components
 import Header from '../Header';
+
 import TimerWindow from '../TimerWindow';
-import SettingsModal from '../SettingsModal';
+
+import Modal from '../Modal';
+import Settings from '../Modal/Settings';
 import AudioFiles from '../AudioFiles';
 
 // Import Global Stylesheet
@@ -26,10 +29,11 @@ class App extends Component {
     };
 
     // This Bindings
-    this.openModal = this.openModal.bind(this);
-    this.closeModal = this.closeModal.bind(this);
+    this.openSettingsModal = this.openSettingsModal.bind(this);
+    this.closeSettingsModal = this.closeSettingsModal.bind(this);
     this.changeSound = this.changeSound.bind(this);
     this.changeVolume = this.changeVolume.bind(this);
+    this.changeTimerSettings = this.changeTimerSettings.bind(this);
   }
 
   //
@@ -61,12 +65,12 @@ class App extends Component {
   }
 
   // Open Close Modal
-  openModal() {
-    this.setState({ isModalOpen: true });
+  openSettingsModal() {
+    this.setState({ isSettingsModalOpen: true });
   }
 
-  closeModal() {
-    this.setState({ isModalOpen: false });
+  closeSettingsModal() {
+    this.setState({ isSettingsModalOpen: false });
   }
 
   // Sound Functions
@@ -112,6 +116,15 @@ class App extends Component {
     this.playSound(this.state.settings.alert, newVolume);
   }
 
+  changeTimerSettings(setting, value) {
+    this.setState({
+      settings: {
+        ...this.state.settings,
+        [setting]: value
+      }
+    });
+  }
+
   setPomodoro() {
     alert('Start Timer!');
   }
@@ -143,7 +156,7 @@ class App extends Component {
   render() {
     return (
       <div className="container">
-        <Header openSettings={this.openModal} />
+        <Header openSettings={this.openSettingsModal} />
         <TimerWindow
           setPomodoro={this.setPomodoro}
           setShortBreak={this.setShortBreak}
@@ -153,14 +166,18 @@ class App extends Component {
           stopTimer={this.stopTimer}
           resetTimer={this.resetTimer}
         />
-        <SettingsModal
-          isOpen={this.state.isModalOpen}
-          closeModal={this.closeModal}
-          changeSound={this.changeSound}
-          changeVolume={this.changeVolume}
+        <Modal
+          isOpen={this.state.isSettingsModalOpen}
+          closeModal={this.closeSettingsModal}
           transitionName="modal-animate"
-          state={this.state}
-        />
+        >
+          <Settings
+            changeSound={this.changeSound}
+            changeVolume={this.changeVolume}
+            changeTimerSettings={this.changeTimerSettings}
+            state={this.state}
+          />
+        </Modal>
         <AudioFiles />
       </div>
     );
