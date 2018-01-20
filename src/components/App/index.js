@@ -50,6 +50,7 @@ class App extends Component {
     this.setDefaults = this.setDefaults.bind(this);
     this.startTimer = this.startTimer.bind(this);
     this.stopTimer = this.stopTimer.bind(this);
+    this.resetTimer = this.resetTimer.bind(this);
     this.countDown = this.countDown.bind(this);
   }
 
@@ -106,6 +107,7 @@ class App extends Component {
       soundArray[i].currentTime = 0;
     }
 
+    // Find Sound Based on Alert Name
     const sound = soundArray.find(sound => sound.src.includes(alert));
     sound.volume = volume / 10;
     sound.play();
@@ -177,7 +179,7 @@ class App extends Component {
     }
   }
 
-  // Method to Update State for ActiveMode(Pomodoro, Short, Long) and Displayed Timer
+  // Update State for ActiveMode(Pomodoro, Short, Long) and Displayed Timer
   setTimer(selection) {
     // Stop Timer
     this.stopTimer();
@@ -234,23 +236,36 @@ class App extends Component {
     this.setState({
       time: timeObject
     });
-    // Stop Timer If 0 Seconds Left
+
+    // Parse Numbers and Update Time in HTML Title
+    function parseTime(number) {
+      return number < 10 ? `0${number}` : number;
+    }
+    document.title = `(${parseTime(timeObject.minutes)}:${parseTime(timeObject.seconds)}) React Timer`;
+
+    // Once Timer Reaches 0 Execute Code Below
     if (seconds === 0) {
+      // Set Document Title Back to Default
+      document.title = 'Time Up! - React Timer';
+      // Remove setInterval on Timer
       clearInterval(this.timer);
+      // Set Timer Back to Default (sans setInterval)
       this.timer = 0;
 
       // Play Sound n Number of Times
       let playThroughs = 2;
       let thisRef = this;
       // Play Sound One Time Before setInterval
-      this.playSound(this.state.settings.alert, this.state.settings.volume);
+      this.playSound();
       // Set Interval Based on Number of Playthroughs
       let player = setInterval(function(){
         if(playThroughs > 0){
-          thisRef.playSound(thisRef.state.settings.alert, thisRef.state.settings.volume);
+          thisRef.playSound();
           playThroughs--;
+        } else {
+          clearInterval(player);
+          document.title = 'React Timer';
         }
-        else clearInterval(player);
       }, 5000);
     }
   }
@@ -272,8 +287,20 @@ class App extends Component {
     }
   }
 
+  // Reset Timer
   resetTimer() {
-    alert('Reset Timer');
+    this.stopTimer();
+    const { activeMode } = this.state;
+    const time = this.state.settings[activeMode];
+    this.setState({
+      time: {
+        seconds: 0,
+        remainingSeconds: (time * 60),
+        minutes: time
+      }
+    });
+    // Set HTML Title to Default
+    document.title = 'React Timer';
   }
 
   render() {

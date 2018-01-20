@@ -24,8 +24,8 @@ const Modal = (props) => {
     return (
       <CSSTransitionGroup
         transitionName={props.transitionName}
-        transitionEnterTimeout={100}
-        transitionLeaveTimeout={100}>
+        transitionEnterTimeout={200}
+        transitionLeaveTimeout={200}>
       </CSSTransitionGroup>
     );
   }

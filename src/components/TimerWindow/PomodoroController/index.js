@@ -3,10 +3,12 @@ import React from 'react';
 import './PomodoroController.css';
 
 const PomodoroController = (props) => {
+  // Detect Which Button is Clicked and Pass Value to setTimer()
   function handleChange(event) {
     const selection = event.target.name;
     props.setTimer(selection);
   }
+  
   const { activeMode } = props;
 
   return (

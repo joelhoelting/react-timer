@@ -7,7 +7,7 @@ import gear from './gear.png';
 const Header = (props) => {
   return (
     <header>
-      <h1>Tomato Timer</h1>
+      <h1>React Timer</h1>
       <button onClick={props.openSettings} title="Settings">
         <img src={gear} alt="settings" />
       </button>
