@@ -29,7 +29,7 @@ class App extends Component {
         short: 5,
         long: 10,
         alert: 'alarm_clock',
-        volume: 5
+        volume: 3
       }
     };
 
@@ -97,15 +97,16 @@ class App extends Component {
 
   /* Sound Functions */
 
-  // Finds HTML5 Audio Element in the DOM and Plays It (Two Parameters: Alert Name, Volume)
-  playSound(alertName, volume) {
+  // Finds HTML5 Audio Element in the DOM and Plays It (Two Parameters: Alert, Volume)
+  playSound(alert = this.state.settings.alert, volume = this.state.settings.volume) {
     const soundArray = Array.from(document.querySelectorAll('audio'));
     // Audio Pauses When Selecting Another Alert
     for (var i = 0; i < soundArray.length; i++) {
       soundArray[i].pause();
       soundArray[i].currentTime = 0;
     }
-    const sound = soundArray.find(sound => sound.src.includes(alertName));
+
+    const sound = soundArray.find(sound => sound.src.includes(alert));
     sound.volume = volume / 10;
     sound.play();
   }
@@ -167,7 +168,13 @@ class App extends Component {
   setDefaults() {
     const defaults = this.defaultValues;
     defaults.isSettingsModalOpen = true;
+    // Set State to Default Values
     this.setState(defaults);
+    const settings = defaults.settings;
+    // Set Local Storage to Default Values
+    for (var key in settings) {
+      localStorage.setItem(key, settings[key]);
+    }
   }
 
   // Method to Update State for ActiveMode(Pomodoro, Short, Long) and Displayed Timer
@@ -179,21 +186,15 @@ class App extends Component {
     switch (selection) {
     case 'pomodoro':
       time = this.state.settings.pomodoro;
-      this.setState({
-        activeMode: selection
-      });
+      this.setState({activeMode: selection});
       break;
     case 'short':
       time = this.state.settings.short;
-      this.setState({
-        activeMode: selection
-      });
+      this.setState({activeMode: selection});
       break;
     case 'long':
       time = this.state.settings.long;
-      this.setState({
-        activeMode: selection
-      });
+      this.setState({activeMode: selection});
       break;
     default:
       break;
@@ -233,11 +234,24 @@ class App extends Component {
     this.setState({
       time: timeObject
     });
-
     // Stop Timer If 0 Seconds Left
     if (seconds === 0) {
       clearInterval(this.timer);
       this.timer = 0;
+
+      // Play Sound n Number of Times
+      let playThroughs = 2;
+      let thisRef = this;
+      // Play Sound One Time Before setInterval
+      this.playSound(this.state.settings.alert, this.state.settings.volume);
+      // Set Interval Based on Number of Playthroughs
+      let player = setInterval(function(){
+        if(playThroughs > 0){
+          thisRef.playSound(thisRef.state.settings.alert, thisRef.state.settings.volume);
+          playThroughs--;
+        }
+        else clearInterval(player);
+      }, 5000);
     }
   }
 

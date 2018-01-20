@@ -26,6 +26,13 @@ const Settings = (props) => {
 
   return (
     <div>
+      <h3>Set Custom Times (in minutes)</h3>
+      <label>Pomodoro</label>
+      <input type="number" step="1" min="1" name="pomodoro" value={pomodoro} onChange={(event) => setTimerSettings(event)} />
+      <label>Short Break</label>
+      <input type="number" step="1" min="1" name="short" value={short} onChange={(event) => setTimerSettings(event)} />
+      <label>Long Break</label>
+      <input type="number" step="1" min="1" name="long" value={long} onChange={(event) => setTimerSettings(event)} />
       <h3>Pick Alert Sound</h3>
       <select id="alert" value={alert} size="5" onChange={(event) => setSound(event)}>
         <option value="alarm_clock">Alarm Clock</option>
@@ -34,26 +41,8 @@ const Settings = (props) => {
         <option value="old_bell">Old Bell</option>
         <option value="ship_brass">Ship Brass</option>
       </select>
-      <h3>Volume</h3>
-      <select id="volume" value={volume} size="10" onChange={(event) => setVolume(event)}>
-        <option value="1">10%</option>
-        <option value="2">20%</option>
-        <option value="3">30%</option>
-        <option value="4">40%</option>
-        <option value="5">50%</option>
-        <option value="6">60%</option>
-        <option value="7">70%</option>
-        <option value="8">80%</option>
-        <option value="9">90%</option>
-        <option value="10">100%</option>
-      </select>
-      <h3>Set Custom Times (in minutes)</h3>
-      <label>Pomodoro</label>
-      <input step="1" min="1" name="pomodoro" type="number" value={pomodoro} onChange={(event) => setTimerSettings(event)} />
-      <label>Short Break</label>
-      <input step="1" min="1" name="short" type="number" value={short} onChange={(event) => setTimerSettings(event)} />
-      <label>Long Break</label>
-      <input step="1" min="1" name="long" type="number" value={long} onChange={(event) => setTimerSettings(event)} />
+      <h3>Volume{volume}</h3>
+      <input type="range" value={volume} min="1" max="10" onChange={(event) => setVolume(event)} />
       <button onClick={() => setDefaults()} >Set Defaults</button>
     </div>
   );
