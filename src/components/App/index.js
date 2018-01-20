@@ -52,11 +52,12 @@ class App extends Component {
     this.stopTimer = this.stopTimer.bind(this);
     this.resetTimer = this.resetTimer.bind(this);
     this.countDown = this.countDown.bind(this);
+    this.bindEvents = this.bindEvents.bind(this);
+    this.assignKeys = this.assignKeys.bind(this);
   }
 
-  //
   componentWillMount() {
-    // Check LocalStorage Before App Rendered and Set State
+    // Check LocalStorage Before App is Rendered and Set State
     // Will Not Run First Time Page is Loaded
     if (localStorage.length > 0) {
       this.setState({
@@ -76,14 +77,16 @@ class App extends Component {
     }
   }
 
-  // After Component Mounts Set Local Storage to Default State
   componentDidMount() {
+    // After Component Mounts Set Local Storage to Default State
     const settings = this.state.settings;
     for (var key in settings) {
       if (settings.hasOwnProperty(key)) {
         localStorage.setItem(key, settings[key]);
       }
     }
+    // Bind Events
+    this.bindEvents();
   }
 
   // Open Settings Modal
@@ -301,6 +304,17 @@ class App extends Component {
     });
     // Set HTML Title to Default
     document.title = 'React Timer';
+  }
+
+  // Bind Events
+  bindEvents() {
+    document.addEventListener('keypress', this.assignKeys);
+  }
+
+  assignKeys(event) {
+    if (event.which === 32) {
+      alert('spacebar pressed');
+    }
   }
 
   render() {
