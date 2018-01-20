@@ -33,7 +33,7 @@ class App extends Component {
       }
     };
 
-    // Default State
+    // Initial State
     this.state = this.defaultValues;
 
     // Global Variables
@@ -95,7 +95,8 @@ class App extends Component {
     this.setState({ isSettingsModalOpen: false });
   }
 
-  // Sound Functions
+  /* Sound Functions */
+
   // Finds HTML5 Audio Element in the DOM and Plays It (Two Parameters: Alert Name, Volume)
   playSound(alertName, volume) {
     const soundArray = Array.from(document.querySelectorAll('audio'));
@@ -171,20 +172,28 @@ class App extends Component {
 
   // Method to Update State for ActiveMode(Pomodoro, Short, Long) and Displayed Timer
   setTimer(selection) {
+    // Stop Timer
+    this.stopTimer();
     // Case Statement -- Set Timer to Match State.Settings Based on Which Button is Clicked (Pomodoro/Short/Long)
     let time;
     switch (selection) {
     case 'pomodoro':
       time = this.state.settings.pomodoro;
-      this.setState({ activeMode: selection});
+      this.setState({
+        activeMode: selection
+      });
       break;
     case 'short':
       time = this.state.settings.short;
-      this.setState({ activeMode: selection});
+      this.setState({
+        activeMode: selection
+      });
       break;
     case 'long':
       time = this.state.settings.long;
-      this.setState({ activeMode: selection});
+      this.setState({
+        activeMode: selection
+      });
       break;
     default:
       break;
@@ -193,14 +202,14 @@ class App extends Component {
     // Always Update Timer When User Changes ActiveMode( Pomodoro, Short, Long )
     this.setState({
       time: {
-        ...this.state.time,
+        seconds: 0,
         remainingSeconds: (time * 60),
         minutes: time
       }
     });
   }
 
-  // Timer Functions
+  /* Timer Functions */
 
   // Returns an Object w/ Minutes and Seconds Based on Remaining Seconds
   secondsToTime(secs){
