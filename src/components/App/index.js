@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import Radium, {StyleRoot, Style} from 'radium';
+
 // Import Components
 import Header from '../Header';
 
@@ -9,8 +11,7 @@ import Modal from '../Modal';
 import Settings from '../Modal/Settings';
 import AudioFiles from '../AudioFiles';
 
-// Import CSS
-import './App.css';
+
 
 class App extends Component {
   constructor() {
@@ -329,34 +330,52 @@ class App extends Component {
   }
 
   render() {
+    var container = {
+      margin: '0 auto',
+      maxWidth: '960px'
+    };
+
     return (
-      <div className="container">
-        <Header openSettings={this.openSettingsModal} />
-        <TimerWindow
-          setTimer={this.setTimer}
-          time={this.state.time}
-          startTimer={this.startTimer}
-          stopTimer={this.stopTimer}
-          resetTimer={this.resetTimer}
-          activeMode={this.state.activeMode}
+      <StyleRoot>
+        <Style
+          scopeSelector="body"
+          rules={{
+            fontFamily: 'Helvetica Neue, Helvetica, Arial, sans-serif',
+            margin: 0,
+            padding: 0,
+            button: {
+              cursor: 'pointer'
+            }
+          }}
         />
-        <Modal
-          isOpen={this.state.isSettingsModalOpen}
-          closeModal={this.closeSettingsModal}
-          transitionName="modal-animate"
-        >
-          <Settings
-            changeSound={this.changeSound}
-            changeVolume={this.changeVolume}
-            changeTimerSettings={this.changeTimerSettings}
-            setDefaults={this.setDefaults}
-            state={this.state}
+        <div style={container}>
+          <Header openSettings={this.openSettingsModal} />
+          <TimerWindow
+            setTimer={this.setTimer}
+            time={this.state.time}
+            startTimer={this.startTimer}
+            stopTimer={this.stopTimer}
+            resetTimer={this.resetTimer}
+            activeMode={this.state.activeMode}
           />
-        </Modal>
-        <AudioFiles />
-      </div>
+          <Modal
+            isOpen={this.state.isSettingsModalOpen}
+            closeModal={this.closeSettingsModal}
+            transitionName="modal-animate"
+          >
+            <Settings
+              changeSound={this.changeSound}
+              changeVolume={this.changeVolume}
+              changeTimerSettings={this.changeTimerSettings}
+              setDefaults={this.setDefaults}
+              state={this.state}
+            />
+          </Modal>
+          <AudioFiles />
+        </div>
+      </StyleRoot>
     );
   }
 }
 
-export default App;
+export default Radium(App);

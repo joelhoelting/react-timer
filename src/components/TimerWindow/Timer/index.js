@@ -1,16 +1,19 @@
 import React from 'react';
 
-import './Timer.css';
-
 const Timer = (props) => {
   function parseTime(time) {
     return time < 10 ? '0' + time : time;
   }
 
-  const {time} = props;
+  const { time } = props;
+
+  const timer = {
+    fontSize: '6rem',
+    textAlign: 'center'
+  };
 
   return (
-    <div className="timer">
+    <div style={timer} className="timer">
       <h1>{parseTime(time.minutes)}:{parseTime(time.seconds)}</h1>
     </div>
   );

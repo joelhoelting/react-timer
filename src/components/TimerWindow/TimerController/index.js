@@ -1,14 +1,24 @@
 import React from 'react';
 
-import './TimerController.css';
-
 const TimerController = (props) => {
   const { startTimer, stopTimer, resetTimer } = props;
+
+  const style = {
+    base: {
+      display: 'flex',
+      'justifyContent': 'space-around',
+    },
+    button: {
+      width: '20%',
+      height: '75px'
+    }
+  };
+
   return (
-    <div className="timerController">
-      <button onClick={startTimer}>Start</button>
-      <button onClick={stopTimer}>Stop</button>
-      <button onClick={resetTimer}>Reset</button>
+    <div style={style.base} className="timerController">
+      <button style={style.button} onClick={startTimer}>Start</button>
+      <button style={style.button} onClick={stopTimer}>Stop</button>
+      <button style={style.button} onClick={resetTimer}>Reset</button>
     </div>
   );
 };

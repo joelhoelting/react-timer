@@ -1,7 +1,5 @@
 import React from 'react';
 
-import './Settings.css';
-
 const Settings = (props) => {
 
   function setSound(event) {
@@ -24,17 +22,29 @@ const Settings = (props) => {
 
   const { pomodoro, long, short, volume, alert } = props.state.settings;
 
+  const form = {
+    select: {
+      width: '100%'
+    },
+    inputNumber: {
+      width: '50px'
+    },
+    inputRange: {
+      width: '100%'
+    }
+  };
+
   return (
     <div>
       <h3>Set Custom Times (in minutes)</h3>
       <label>Pomodoro</label>
-      <input type="number" step="1" min="1" name="pomodoro" value={pomodoro} onChange={(event) => setTimerSettings(event)} />
+      <input style={form.inputNumber} type="number" step="1" min="1" name="pomodoro" value={pomodoro} onChange={(event) => setTimerSettings(event)} />
       <label>Short Break</label>
-      <input type="number" step="1" min="1" name="short" value={short} onChange={(event) => setTimerSettings(event)} />
+      <input style={form.inputNumber} type="number" step="1" min="1" name="short" value={short} onChange={(event) => setTimerSettings(event)} />
       <label>Long Break</label>
-      <input type="number" step="1" min="1" name="long" value={long} onChange={(event) => setTimerSettings(event)} />
+      <input style={form.inputNumber} type="number" step="1" min="1" name="long" value={long} onChange={(event) => setTimerSettings(event)} />
       <h3>Pick Alert Sound</h3>
-      <select id="alert" value={alert} size="5" onChange={(event) => setSound(event)}>
+      <select style={form.select} id="alert" value={alert} size="5" onChange={(event) => setSound(event)}>
         <option value="alarm_clock">Alarm Clock</option>
         <option value="applause_cheers">Applause & Cheers</option>
         <option value="foghorn_barge">Foghorn Barge</option>
@@ -42,7 +52,7 @@ const Settings = (props) => {
         <option value="ship_brass">Ship Brass</option>
       </select>
       <h3>Volume{volume}</h3>
-      <input type="range" value={volume} min="1" max="10" onChange={(event) => setVolume(event)} />
+      <input style={form.inputRange} type="range" value={volume} min="1" max="10" onChange={(event) => setVolume(event)} />
       <button onClick={() => setDefaults()} >Set Defaults</button>
     </div>
   );
