@@ -10,7 +10,7 @@ import Modal from './Modal';
 import Settings from './Modal/Settings';
 // Audio Files
 import AudioFiles from './AudioFiles';
-
+import Spinner from './Spinner';
 
 
 class App extends Component {
@@ -349,6 +349,7 @@ class App extends Component {
           }}
         />
         <div style={container} className="container">
+          <Spinner />
           <Header openSettings={this.openSettingsModal} />
           <TimerWindow
             setTimer={this.setTimer}
