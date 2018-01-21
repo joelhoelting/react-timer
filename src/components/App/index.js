@@ -348,7 +348,7 @@ class App extends Component {
             }
           }}
         />
-        <div style={container}>
+        <div style={container} className="container">
           <Header openSettings={this.openSettingsModal} />
           <TimerWindow
             setTimer={this.setTimer}
