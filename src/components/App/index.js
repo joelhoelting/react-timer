@@ -180,6 +180,7 @@ class App extends Component {
     for (var key in settings) {
       localStorage.setItem(key, settings[key]);
     }
+    document.title = 'React Timer';
   }
 
   // Update State for ActiveMode(Pomodoro, Short, Long) and Displayed Timer
@@ -311,9 +312,19 @@ class App extends Component {
     document.addEventListener('keypress', this.assignKeys);
   }
 
+  // Assign Keyboard Hotkeys
   assignKeys(event) {
-    if (event.which === 32) {
-      alert('spacebar pressed');
+    switch(event.which) {
+    case 32:
+      this.timer !== 0 ? this.stopTimer() : this.startTimer();
+      break;
+    case 0:
+      if (this.state.isSettingsModalOpen) {
+        this.setState({ isSettingsModalOpen: false });
+      }
+      break;
+    default:
+      break;
     }
   }
 
