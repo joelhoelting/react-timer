@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
-
+// Radium for Component Styles
 import Radium, {StyleRoot, Style} from 'radium';
-
-// Import Components
-import Header from '../Header';
-
-import TimerWindow from '../TimerWindow';
-
-import Modal from '../Modal';
-import Settings from '../Modal/Settings';
-import AudioFiles from '../AudioFiles';
+// Header
+import Header from './Header';
+// Timer Window and Child Components
+import TimerWindow from './TimerWindow';
+// Modal & Settings Component
+import Modal from './Modal';
+import Settings from './Modal/Settings';
+// Audio Files
+import AudioFiles from './AudioFiles';
 
 
 
