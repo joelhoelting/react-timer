@@ -187,6 +187,8 @@ class App extends Component {
 
   // Update State for ActiveMode(Pomodoro, Short, Long) and Displayed Timer
   setTimer(selection) {
+    // Reset Document Title
+    document.title = 'React Timer';
     // Stop Timer
     this.stopTimer();
     // Case Statement -- Set Timer to Match State.Settings Based on Which Button is Clicked (Pomodoro/Short/Long)
