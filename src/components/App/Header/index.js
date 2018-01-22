@@ -10,7 +10,10 @@ const Header = (props) => {
     base: {
       display: 'flex',
       justifyContent: 'space-between',
-      padding: '10px'
+      padding: '20px'
+    },
+    title: {
+      fontSize: '2rem'
     }
   };
 

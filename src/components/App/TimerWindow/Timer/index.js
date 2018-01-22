@@ -14,6 +14,7 @@ const Timer = (props) => {
     '@media (max-width: 550px)': {
       fontSize: '4rem'
     },
+
   };
 
   return (

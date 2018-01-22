@@ -6,7 +6,7 @@ import Header from './Header';
 // Timer Window and Child Components
 import TimerWindow from './TimerWindow';
 // Import Pulse
-// import Pulse from './Pulse';
+import Pulse from './Pulse';
 // Modal & Settings Component
 import Modal from './Modal';
 import Settings from './Modal/Settings';
@@ -288,6 +288,10 @@ class App extends Component {
     if (this.state.activeTimer === false) {
       this.setState({ activeTimer: true });
     }
+    // Remove Focus From Button
+    if (document.activeElement !== document.body) {
+      document.activeElement.blur();
+    }
   }
 
   // Stop Timer
@@ -300,6 +304,10 @@ class App extends Component {
     // Set Active Timer State to False
     if (this.state.activeTimer === true) {
       this.setState({ activeTimer: false });
+    }
+    // Remove Focus From Button
+    if (document.activeElement !== document.body) {
+      document.activeElement.blur();
     }
   }
 
@@ -328,7 +336,9 @@ class App extends Component {
   assignKeys(event) {
     switch(event.keyCode) {
     case 32:
-      this.timer !== 0 ? this.stopTimer() : this.startTimer();
+      if (!this.state.isSettingsModalOpen) {
+        this.timer !== 0 ? this.stopTimer() : this.startTimer();
+      }
       break;
     case 27:
       if (this.state.isSettingsModalOpen) {
@@ -369,7 +379,7 @@ class App extends Component {
       margin: '0 auto',
       maxWidth: '960px',
       width: '90%',
-      height: '100vh'
+      height: '99vh',
     };
 
     return (
@@ -400,8 +410,8 @@ class App extends Component {
             />
           </Modal>
           <AudioFiles />
-          {/* <Pulse /> */}
         </div>
+        <Pulse activeTimer={this.state.activeTimer}/>
       </StyleRoot>
     );
   }

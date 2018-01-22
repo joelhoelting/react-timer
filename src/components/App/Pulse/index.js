@@ -1,11 +1,11 @@
 import React from 'react';
 import Radium from 'radium';
 
-const Pulse = () => {
+const Pulse = (props) => {
   var pulseKeyframes = Radium.keyframes({
-    '0%': {width: '10%'},
-    '50%': {width: '80%'},
-    '100%': {width: '10%'},
+    '0%': {width: '50%'},
+    '50%': {width: '100%'},
+    '100%': {width: '50%'},
   }, 'pulse');
 
   var styles = {
@@ -15,17 +15,23 @@ const Pulse = () => {
       // Assign the result of `keyframes` to `animationName`
       animationName: pulseKeyframes,
       background: '#274060',
-      borderRadius: '5px',
-      height: '5px',
+      height: '1vh',
       margin: '0 auto',
     }
   };
 
-  return (
-    <div>
-      <div style={styles.inner} />
-    </div>
-  );
+  const { activeTimer } = props;
+
+  if (activeTimer) {
+    return (
+      <div>
+        <div style={styles.inner} />
+      </div>
+    );
+  } else {
+    return null;
+  }
+
 };
 
 export default Radium(Pulse);
