@@ -326,7 +326,7 @@ class App extends Component {
 
   // Assign Keyboard Hotkeys
   assignKeys(event) {
-    switch(event.which) {
+    switch(event.keyCode) {
     case 32:
       this.timer !== 0 ? this.stopTimer() : this.startTimer();
       break;
