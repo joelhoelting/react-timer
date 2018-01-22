@@ -9,17 +9,21 @@ const Timer = (props) => {
   const { time } = props;
 
   const timer = {
-    fontSize: '6rem',
-    textAlign: 'center',
-    '@media (max-width: 550px)': {
-      fontSize: '4rem'
-    },
-
+    base: {
+      fontSize: '10rem',
+      textAlign: 'center',
+      '@media (max-width: 1400px)': {
+        fontSize: '5rem'
+      },
+      '@media (max-width: 550px)': {
+        fontSize: '4rem'
+      },
+    }
   };
 
   return (
-    <div style={timer} className="timer">
-      <h1>{parseTime(time.minutes)}:{parseTime(time.seconds)}</h1>
+    <div className="timer">
+      <h1 style={timer.base}>{parseTime(time.minutes)}:{parseTime(time.seconds)}</h1>
     </div>
   );
 };

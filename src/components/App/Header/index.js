@@ -12,15 +12,16 @@ const Header = (props) => {
       justifyContent: 'space-between',
       padding: '20px'
     },
-    title: {
-      fontSize: '2rem'
+    button: {
+      height: '100px',
+      width: '100px'
     }
   };
 
   return (
     <header style={header.base}>
       <h1>React Timer</h1>
-      <button onClick={props.openSettings} title="Settings">
+      <button style={header.button} onClick={props.openSettings} title="Settings">
         <img src={gear} alt="settings" />
       </button>
     </header>

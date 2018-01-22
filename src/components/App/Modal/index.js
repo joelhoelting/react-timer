@@ -24,10 +24,11 @@ const Modal = (props) => {
       borderRadius: '5px',
       border: '4px solid #565656',
       padding: '30px',
-      maxWidth: '500px',
+      width: '80%',
+      maxWidth: '600px',
       background: '#fff',
-      '@media (max-width: 550px)': {
-        maxWidth: '80%'
+      '@media (max-width: 650px)': {
+        padding: '20px',
       },
     },
     close: {

@@ -19,10 +19,12 @@ const TimerController = (props) => {
   };
 
   return (
-    <div style={style.base} className="timerController">
-      <button className={activeTimer === true ? 'active' : 'inactive'} style={style.button} onClick={startTimer}>Start</button>
-      <button className={activeTimer === false ? 'active' : 'inactive'} style={style.button} onClick={stopTimer}>Stop</button>
-      <button style={style.button} onClick={resetTimer}>Reset</button>
+    <div>
+      <div style={style.base} className="timerController">
+        <button className={activeTimer === true ? 'active' : 'inactive'} style={style.button} onClick={startTimer}>Start</button>
+        <button className={activeTimer === false ? 'active' : 'inactive'} style={style.button} onClick={stopTimer}>Stop</button>
+        <button style={style.button} onClick={resetTimer}>Reset</button>
+      </div>
     </div>
   );
 };

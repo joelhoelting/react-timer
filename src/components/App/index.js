@@ -355,6 +355,7 @@ class App extends Component {
       // Body
       'body': {
         fontFamily: 'Anonymous Pro, sans-serif',
+        fontSize: '20px',
         margin: 0,
         padding: 0
       },

@@ -1,4 +1,5 @@
 import React from 'react';
+import Radium from 'radium';
 
 const Settings = (props) => {
 
@@ -23,26 +24,37 @@ const Settings = (props) => {
   const { pomodoro, long, short, volume, alert } = props.state.settings;
 
   const form = {
+    div: {
+      margin: '20px 0'
+    },
     select: {
       width: '100%'
     },
     inputNumber: {
-      width: '50px'
+      width: '200px',
+      float: 'right'
     },
     inputRange: {
-      width: '100%'
+      width: '100%',
+      margin: '0 0 30px'
     }
   };
 
   return (
     <div>
       <h3>Set Custom Times (minutes)</h3>
-      <label>Pomodoro: </label>
-      <input style={form.inputNumber} type="number" step="1" min="1" name="pomodoro" value={pomodoro} onChange={(event) => setTimerSettings(event)} />
-      <label>Short Break: </label>
-      <input style={form.inputNumber} type="number" step="1" min="1" name="short" value={short} onChange={(event) => setTimerSettings(event)} />
-      <label>Long Break: </label>
-      <input style={form.inputNumber} type="number" step="1" min="1" name="long" value={long} onChange={(event) => setTimerSettings(event)} />
+      <div style={form.div}>
+        <label>Pomodoro </label>
+        <input style={form.inputNumber} type="number" step="1" min="1" name="pomodoro" value={pomodoro} onChange={(event) => setTimerSettings(event)} />
+      </div>
+      <div style={form.div}>
+        <label>Short Break </label>
+        <input style={form.inputNumber} type="number" step="1" min="1" name="short" value={short} onChange={(event) => setTimerSettings(event)} />
+      </div>
+      <div style={form.div}>
+        <label>Long Break </label>
+        <input style={form.inputNumber} type="number" step="1" min="1" name="long" value={long} onChange={(event) => setTimerSettings(event)} />
+      </div>
       <h3>Pick Alert Sound</h3>
       <select style={form.select} id="alert" value={alert} size="5" onChange={(event) => setSound(event)}>
         <option value="alarm_clock">Alarm Clock</option>
@@ -58,4 +70,4 @@ const Settings = (props) => {
   );
 };
 
-export default Settings;
+export default Radium(Settings);
