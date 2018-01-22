@@ -1,0 +1,37 @@
+.modal-animate-enter {
+  opacity: 0;
+  transition: opacity .2s linear;
+}
+
+.modal-animate-enter-active {
+  opacity: 1;
+}
+
+.modal-animate-enter {
+  .modal-container {
+    transform: translateY(-130%);
+    opacity: 0;
+    transition: all 0.3s ease .2s;
+  }
+  &.modal-animate-enter-active .modal-container {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.modal-animate-leave {
+  opacity: 1;
+  transition: opacity 0.2s ease .2s;
+  .modal-container {
+    transform: translateY(0);
+    opacity: 1;
+    transition: all 0.3s ease;
+  }
+  &.modal-animate-leave-active {
+    opacity: 0;
+    .modal-container {
+      opacity: 0;
+      transform: translateY(-130%);
+    }
+  }
+}
