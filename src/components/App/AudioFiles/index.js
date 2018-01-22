@@ -8,13 +8,6 @@ import old_bell from './sounds/old_bell.mp3';
 import ship_brass from './sounds/ship_brass.mp3';
 
 const AudioFiles = () => {
-  // const audioArray = [
-  //   alarm_clock,
-  //   applause_cheers,
-  //   foghorn_barge,
-  //   old_bell,
-  //   ship_brass
-  // ]
 
   return (
     <div>

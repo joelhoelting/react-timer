@@ -7,6 +7,7 @@ import TimerController from './TimerController';
 const TimerWindow = (props) => {
   const {
     activeMode,
+    activeTimer,
     setTimer,
     startTimer,
     stopTimer,
@@ -22,6 +23,7 @@ const TimerWindow = (props) => {
       />
       <Timer time={time}/>
       <TimerController
+        activeTimer={activeTimer}
         startTimer={startTimer}
         stopTimer={stopTimer}
         resetTimer={resetTimer}

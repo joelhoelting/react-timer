@@ -1,5 +1,5 @@
 import React from 'react';
-import Radium from 'radium';
+import Radium, {Style} from 'radium';
 
 const PomodoroController = (props) => {
   // Detect Which Button is Clicked and Pass Value to setTimer()
@@ -14,19 +14,27 @@ const PomodoroController = (props) => {
     base: {
       display: 'flex',
       justifyContent: 'space-around',
-      background: 'aqua'
+      margin: '20px 0'
     },
     button: {
       width: '33%',
-      ':hover': {
-        backgroundColor: '#0088FF'
-      },
+      height: '50px'
+    }
+  };
+
+  const activeButton = {
+    'button.active': {
+      background: '#274060',
+      borderRadius: '5px',
+      border: 'none',
+      color: 'white'
     }
   };
 
 
   return (
     <div style={style.base} className="pomodoroController">
+      <Style rules={activeButton} />
       <button
         key="pomodoro"
         style={style.button}
@@ -43,7 +51,7 @@ const PomodoroController = (props) => {
         name="short"
         onClick={(event) => handleChange(event)}
       >
-          Short Break
+        Short Break
       </button>
       <button
         key="long"

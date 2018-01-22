@@ -5,12 +5,13 @@ import Radium, {StyleRoot, Style} from 'radium';
 import Header from './Header';
 // Timer Window and Child Components
 import TimerWindow from './TimerWindow';
+// Import Pulse
+// import Pulse from './Pulse';
 // Modal & Settings Component
 import Modal from './Modal';
 import Settings from './Modal/Settings';
 // Audio Files
 import AudioFiles from './AudioFiles';
-import Spinner from './Spinner';
 
 
 class App extends Component {
@@ -20,6 +21,7 @@ class App extends Component {
     this.defaultValues = {
       isSettingsModalOpen: false,
       activeMode: 'pomodoro',
+      activeTimer: false,
       time: {
         minutes: 25,
         seconds: 0,
@@ -39,7 +41,6 @@ class App extends Component {
 
     // Global Variables
     this.timer = 0;
-
 
     // This Bindings
     this.openSettingsModal = this.openSettingsModal.bind(this);
@@ -282,6 +283,11 @@ class App extends Component {
       // this.timer gets set to an interval object
       this.timer = setInterval(this.countDown, 1000);
     }
+
+    // Set Active Timer State to True
+    if (this.state.activeTimer === false) {
+      this.setState({ activeTimer: true });
+    }
   }
 
   // Stop Timer
@@ -289,6 +295,11 @@ class App extends Component {
     if (this.timer !== 0) {
       clearInterval(this.timer);
       this.timer = 0;
+    }
+
+    // Set Active Timer State to False
+    if (this.state.activeTimer === true) {
+      this.setState({ activeTimer: false });
     }
   }
 
@@ -310,7 +321,7 @@ class App extends Component {
 
   // Bind Events
   bindEvents() {
-    document.addEventListener('keypress', this.assignKeys);
+    document.addEventListener('keydown', this.assignKeys);
   }
 
   // Assign Keyboard Hotkeys
@@ -319,7 +330,7 @@ class App extends Component {
     case 32:
       this.timer !== 0 ? this.stopTimer() : this.startTimer();
       break;
-    case 0:
+    case 27:
       if (this.state.isSettingsModalOpen) {
         this.setState({ isSettingsModalOpen: false });
       }
@@ -330,26 +341,41 @@ class App extends Component {
   }
 
   render() {
-    var container = {
+    const global = {
+      // Body
+      'body': {
+        fontFamily: 'Anonymous Pro, sans-serif',
+        margin: 0,
+        padding: 0
+      },
+      button: {
+        fontFamily: 'Anonymous Pro, sans-serif',
+        fontWeight: '700'
+      },
+      // Button Globals
+      'button:active': {
+        outline: 'none'
+      },
+      'button:focus': {
+        outline: 'none'
+      },
+      'button:hover': {
+        cursor: 'pointer'
+      }
+    };
+
+    // Container Styling
+    const container = {
       margin: '0 auto',
-      maxWidth: '960px'
+      maxWidth: '960px',
+      width: '90%',
+      height: '100vh'
     };
 
     return (
       <StyleRoot>
-        <Style
-          scopeSelector="body"
-          rules={{
-            fontFamily: 'Helvetica Neue, Helvetica, Arial, sans-serif',
-            margin: 0,
-            padding: 0,
-            button: {
-              cursor: 'pointer'
-            }
-          }}
-        />
+        <Style rules={global} />
         <div style={container} className="container">
-          <Spinner />
           <Header openSettings={this.openSettingsModal} />
           <TimerWindow
             setTimer={this.setTimer}
@@ -358,6 +384,7 @@ class App extends Component {
             stopTimer={this.stopTimer}
             resetTimer={this.resetTimer}
             activeMode={this.state.activeMode}
+            activeTimer={this.state.activeTimer}
           />
           <Modal
             isOpen={this.state.isSettingsModalOpen}
@@ -373,6 +400,7 @@ class App extends Component {
             />
           </Modal>
           <AudioFiles />
+          {/* <Pulse /> */}
         </div>
       </StyleRoot>
     );

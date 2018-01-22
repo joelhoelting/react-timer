@@ -36,12 +36,12 @@ const Settings = (props) => {
 
   return (
     <div>
-      <h3>Set Custom Times (in minutes)</h3>
-      <label>Pomodoro</label>
+      <h3>Set Custom Times (minutes)</h3>
+      <label>Pomodoro: </label>
       <input style={form.inputNumber} type="number" step="1" min="1" name="pomodoro" value={pomodoro} onChange={(event) => setTimerSettings(event)} />
-      <label>Short Break</label>
+      <label>Short Break: </label>
       <input style={form.inputNumber} type="number" step="1" min="1" name="short" value={short} onChange={(event) => setTimerSettings(event)} />
-      <label>Long Break</label>
+      <label>Long Break: </label>
       <input style={form.inputNumber} type="number" step="1" min="1" name="long" value={long} onChange={(event) => setTimerSettings(event)} />
       <h3>Pick Alert Sound</h3>
       <select style={form.select} id="alert" value={alert} size="5" onChange={(event) => setSound(event)}>
@@ -51,7 +51,7 @@ const Settings = (props) => {
         <option value="old_bell">Old Bell</option>
         <option value="ship_brass">Ship Brass</option>
       </select>
-      <h3>Volume{volume}</h3>
+      <h3>Volume: {volume}</h3>
       <input style={form.inputRange} type="range" value={volume} min="1" max="10" onChange={(event) => setVolume(event)} />
       <button onClick={() => setDefaults()} >Set Defaults</button>
     </div>

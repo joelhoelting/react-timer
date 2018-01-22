@@ -1,4 +1,5 @@
 import React from 'react';
+import Radium from 'radium';
 
 const Timer = (props) => {
   function parseTime(time) {
@@ -9,7 +10,10 @@ const Timer = (props) => {
 
   const timer = {
     fontSize: '6rem',
-    textAlign: 'center'
+    textAlign: 'center',
+    '@media (max-width: 550px)': {
+      fontSize: '4rem'
+    },
   };
 
   return (
@@ -19,4 +23,4 @@ const Timer = (props) => {
   );
 };
 
-export default Timer;
+export default Radium(Timer);
