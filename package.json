@@ -9,7 +9,8 @@
     "react": "^16.2.0",
     "react-addons-css-transition-group": "^15.6.2",
     "react-dom": "^16.2.0",
-    "react-scripts": "1.0.17"
+    "react-scripts": "1.0.17",
+    "webfontloader": "^1.6.28"
   },
   "scripts": {
     "build-css": "node-sass-chokidar src/ -o src/",
