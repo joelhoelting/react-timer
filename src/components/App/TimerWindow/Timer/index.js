@@ -10,13 +10,16 @@ const Timer = (props) => {
 
   const timer = {
     base: {
-      fontSize: '10rem',
+      fontSize: '12rem',
       textAlign: 'center',
       '@media (max-width: 1400px)': {
-        fontSize: '5rem'
+        fontSize: '10rem'
+      },
+      '@media (max-height: 800px)': {
+        fontSize: '10rem'
       },
       '@media (max-width: 550px)': {
-        fontSize: '4rem'
+        fontSize: '6rem'
       },
     }
   };
