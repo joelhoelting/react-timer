@@ -22,7 +22,8 @@ To install and run this project locally:
 
 #### What I Learned 
 1. Radium for inline styles
-2. How to use CSS Transition Group for CSS animations and transitions
+2. CSS Transition Group for CSS animations and transitions
 3. When to use functional stateless components vs. stateful components
 4. Built a resuable modal component from scratch
+5. Leveraged setTimeout to build a fully functional timer
 
