@@ -1,6 +1,6 @@
 ## React Timer
 
-React times is a pomodoro timer inpsired by a timer I frequently use: [tomato-timer.com](tomato-timer.com). I liked many of the features of that timer but I wanted to implement features that I felt would be useful. It was a fun challenge to implement all of the features from that timer in a new project. Perfect project for a state-based Javascript library like React.
+React Timer is a desktop-first pomodoro timer inpsired by a timer I frequently use: [tomato-timer.com](https://tomato-timer.com). It's also my first React project. I liked many of the features of that timer but I wanted to implement other features that I felt would be useful.
 
 #### Features
 1. Settings for Custom Pomodoro & Break Intervals
