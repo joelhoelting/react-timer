@@ -1,6 +1,6 @@
-## React Timer
+# React Timer
 
-React Timer is a lightweight and minimalistic pomodoro timer inpsired by [tomato-timer.com](https://tomato-timer.com). It's also my first React project. I liked many of the features of tomato-timer.com but I wanted to implement other features that I thought would be useful.
+React Timer is a lightweight and minimalistic pomodoro timer inspired by [tomato-timer.com](https://tomato-timer.com). I liked many of the features of tomato-timer.com but I wanted to implement other features that I thought would be useful.
 
 #### Features
 1. Settings for custom pomodoro and break invervals
