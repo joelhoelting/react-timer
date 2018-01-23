@@ -3,9 +3,9 @@
 React Timer is a lightweight and minimalistic pomodoro timer inpsired by [tomato-timer.com](https://tomato-timer.com). It's also my first React project. I liked many of the features of tomato-timer.com but I wanted to implement other features that I thought would be useful.
 
 #### Features
-1. Settings for Custom Pomodoro & Break Intervals
-2. Choose an Audio Alert from 5 Different Sounds
-3. Utilizes local storage to Persist Settings in Case Browser Closes/Refreshes
+1. Settings for custom pomodoro and break invervals
+2. Choose audio alert from 5 different sounds
+3. Utilizes local storage to persist settings in case browser closes or refreshes
 4. Timer is Visible in Browser Tab for Easy Viewing While in Other Tabs
 
 #### Wishlist
@@ -19,3 +19,10 @@ React Timer is a lightweight and minimalistic pomodoro timer inpsired by [tomato
 To install and run this project locally:
 
 `npm install && npm run`
+
+#### What I Learned 
+1. Radium for inline styles
+2. How to use CSS Transition Group for CSS animations and transitions
+3. When to use functional stateless components vs. stateful components
+4. Built a resuable modal component from scratch
+
