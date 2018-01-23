@@ -4,12 +4,12 @@ React Timer is a desktop-first pomodoro timer inpsired by a timer I frequently u
 
 #### Features
 1. Settings for Custom Pomodoro & Break Intervals
-2. Choose an Audio Alert from 5 Sounds
-3. Localstorage Saves Your Preferences in Case Browser Closes/Refreshes
+2. Choose an Audio Alert from 5 Different Sounds
+3. Utilizes local storage to Persist Settings in Case Browser Closes/Refreshes
 4. Timer is Visible in Browser Tab for Easy Viewing While in Other Tabs
 
 ## Install & Run
 
-To view this project locally:
+To install and run this project locally:
 
 `npm install && npm run`
