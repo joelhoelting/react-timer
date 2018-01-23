@@ -182,7 +182,6 @@ class App extends Component {
     for (var key in settings) {
       localStorage.setItem(key, settings[key]);
     }
-    document.title = 'React Timer';
   }
 
   // Update State for ActiveMode(Pomodoro, Short, Long) and Displayed Timer
