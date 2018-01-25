@@ -254,10 +254,9 @@ class App extends Component {
     if (seconds === 0) {
       // Set Document Title Back to Default
       document.title = 'Time Up! - React Timer';
-      // Remove setInterval on Timer
-      clearInterval(this.timer);
-      // Set Timer Back to Default (sans setInterval)
-      this.timer = 0;
+      // Stop and Reset Timer
+      this.stopTimer();
+      this.resetTimer();
 
       // Play Sound n Number of Times
       let playThroughs = 2;

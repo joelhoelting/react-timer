@@ -19,7 +19,7 @@ const Timer = (props) => {
         fontSize: '10rem'
       },
       '@media (max-width: 550px)': {
-        fontSize: '6rem'
+        fontSize: '7rem'
       },
     }
   };
