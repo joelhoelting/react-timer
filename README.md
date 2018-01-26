@@ -1,6 +1,6 @@
 # React Timer
 
-React Timer is a lightweight and minimalistic pomodoro timer inspired by [tomato-timer.com](https://tomato-timer.com).
+React Timer is a lightweight and minimalistic Pomodoro timer inspired by [tomato-timer.com](https://tomato-timer.com).
 
 #### Features
 1. Settings for custom pomodoro and break invervals
@@ -20,10 +20,9 @@ To install and run this project locally:
 
 `npm install && npm run`
 
-#### What I Learned 
+#### What I Learned
 1. Radium for inline styles
 2. CSS Transition Group for CSS animations and transitions
 3. When to use functional stateless components vs. stateful components
 4. Built a resuable modal component from scratch
 5. Leveraged setTimeout to build a fully functional timer
-

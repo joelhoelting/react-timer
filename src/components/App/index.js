@@ -32,7 +32,12 @@ class App extends Component {
         short: 5,
         long: 10,
         alert: 'alarm_clock',
-        volume: 3
+        volume: 2
+      },
+      log: {
+        pomodoro: 0,
+        short: 0,
+        long: 0
       }
     };
 
@@ -112,6 +117,11 @@ class App extends Component {
       soundArray[i].currentTime = 0;
     }
 
+    // Don't Play Sound if User Changes Volume to 0
+    if (volume === 0) {
+      return;
+    }
+
     // Find Sound Based on Alert Name
     const sound = soundArray.find(sound => sound.src.includes(alert));
     sound.volume = volume / 10;
@@ -148,7 +158,6 @@ class App extends Component {
   }
 
   changeTimerSettings(setting, minutes) {
-
     // Set State After User Changes Timer Settings
     this.setState({
       settings: {
@@ -239,16 +248,16 @@ class App extends Component {
     let timeObject = this.secondsToTime(seconds);
     timeObject.remainingSeconds = seconds;
 
-    // Timer Gets Updated w/ Remaining Minutes, Seconds, Total Seconds Remaining
-    this.setState({
-      time: timeObject
-    });
-
     // Parse Numbers and Update Time in HTML Title
     function parseTime(number) {
       return number < 10 ? `0${number}` : number;
     }
     document.title = `(${parseTime(timeObject.minutes)}:${parseTime(timeObject.seconds)}) React Timer`;
+
+    // Timer Gets Updated w/ Remaining Minutes, Seconds, Total Seconds Remaining
+    this.setState({
+      time: timeObject
+    });
 
     // Once Timer Reaches 0 Execute Code Below
     if (seconds === 0) {
@@ -273,6 +282,33 @@ class App extends Component {
           document.title = 'React Timer';
         }
       }, 5000);
+      this.logProgressSetTimer();
+    }
+  }
+
+  // Function to Log and Keep Track of User Progress
+  // Timer Settings Change Based on Progress
+
+  logProgressSetTimer() {
+    const activeMode = this.state.activeMode;
+    let counterProgress = this.state.log[activeMode] + 1;
+    this.setState({
+      log: {
+        ...this.state.log,
+        [activeMode]: counterProgress
+      }
+    });
+    if (activeMode === 'pomodoro') {
+      if (this.state.log[activeMode] % 4 === 0) {
+        this.setState({activeMode: 'long'});
+        this.setTimer('long');
+      } else {
+        this.setState({activeMode: 'short'});
+        this.setTimer('short');
+      }
+    } else {
+      this.setState({activeMode: 'pomodoro'});
+      this.setTimer('pomodoro');
     }
   }
 
@@ -283,7 +319,6 @@ class App extends Component {
       // this.timer gets set to an interval object
       this.timer = setInterval(this.countDown, 1000);
     }
-
     // Set Active Timer State to True
     if (this.state.activeTimer === false) {
       this.setState({ activeTimer: true });
@@ -323,7 +358,6 @@ class App extends Component {
         minutes: time
       }
     });
-    // Set HTML Title to Default
     document.title = 'React Timer';
   }
 

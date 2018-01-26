@@ -63,8 +63,8 @@ const Settings = (props) => {
         <option value="old_bell">Old Bell</option>
         <option value="ship_brass">Ship Brass</option>
       </select>
-      <h3>Volume: {volume}</h3>
-      <input style={form.inputRange} type="range" value={volume} min="1" max="10" onChange={(event) => setVolume(event)} />
+      <h3>Volume: {volume === 0 ? 'Mute' : volume}</h3>
+      <input style={form.inputRange} type="range" value={volume} min="0" max="10" onChange={(event) => setVolume(event)} />
       <button onClick={() => setDefaults()} >Set Defaults</button>
     </div>
   );
