@@ -7,11 +7,10 @@ React Timer is a lightweight and minimalistic Pomodoro timer inspired by [tomato
 1. Settings for custom pomodoro and break invervals
 2. Choose audio alert from 5 different sounds
 3. Utilizes local storage to persist settings in case browser closes or refreshes
-4. Timer is Visible in Browser Tab for Easy Viewing While in Other Tabs
+4. Timer is visible in browser tab for easy viewing while in other tabs
+5. Logging of progress, auto switches to long break after 4 pomodoros
 
 #### Wishlist
-1. Track completed pomodoros (w/ option to reset)
-2. Timer switches to short break after each pomodoro, switches to long break after 4 pomodoros
 3. Display a checkmark/tomato/indicator after each completed pomodoro
 4. Add new audio files
 
