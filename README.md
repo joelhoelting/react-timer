@@ -1,4 +1,5 @@
 # React Timer
+![react-timer](https://user-images.githubusercontent.com/17229217/35420284-a9abeede-020a-11e8-8173-71f208a2a1b7.png)
 
 React Timer is a lightweight and minimalistic Pomodoro timer inspired by [tomato-timer.com](https://tomato-timer.com).
 
