@@ -18,6 +18,12 @@ const Timer = (props) => {
       '@media (max-height: 800px)': {
         fontSize: '10rem'
       },
+      '@media (max-height: 750px)': {
+        fontSize: '8rem'
+      },
+      '@media (max-height: 650px)': {
+        margin: '50px'
+      },
       '@media (max-width: 550px)': {
         fontSize: '7rem'
       },
