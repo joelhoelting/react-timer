@@ -63,10 +63,21 @@ class App extends Component {
     this.assignKeys = this.assignKeys.bind(this);
   }
 
+  checkLocalStorage() {
+    var test = 'test';
+    try {
+      localStorage.setItem(test, test);
+      localStorage.removeItem(test);
+      return true;
+    } catch(e) {
+      return false;
+    }
+  }
+
   componentWillMount() {
     // Check LocalStorage Before App is Rendered and Set State
     // Will Not Run First Time Page is Loaded
-    if (localStorage.length > 0) {
+    if (this.checkLocalStorage() && localStorage.length > 0) {
       this.setState({
         time: {
           ...this.state.time,
@@ -86,12 +97,15 @@ class App extends Component {
 
   componentDidMount() {
     // After Component Mounts Set Local Storage to Default State
-    const settings = this.state.settings;
-    for (var key in settings) {
-      if (settings.hasOwnProperty(key)) {
-        localStorage.setItem(key, settings[key]);
+    if (this.checkLocalStorage()) {
+      const settings = this.state.settings;
+      for (var key in settings) {
+        if (settings.hasOwnProperty(key)) {
+          localStorage.setItem(key, settings[key]);
+        }
       }
     }
+
     // Bind Events
     this.bindEvents();
   }
@@ -137,7 +151,8 @@ class App extends Component {
       }
     });
     // Persist Alert Selection to LocalStorage
-    localStorage.setItem('alert', alertName);
+    if (this.checkLocalStorage()) { localStorage.setItem('alert', alertName);}
+
     // Play Sound
     this.playSound(alertName, this.state.settings.volume);
   }
@@ -152,7 +167,7 @@ class App extends Component {
       }
     });
     // Persist Alert Selection to LocalStorage
-    localStorage.setItem('volume', newVolume);
+    if (this.checkLocalStorage()) {localStorage.setItem('volume', newVolume);}
     // Play Sound
     this.playSound(this.state.settings.alert, newVolume);
   }
@@ -178,7 +193,7 @@ class App extends Component {
     }
 
     // Persist Timer Setting to LocalStorage
-    localStorage.setItem(setting, minutes);
+    if (this.checkLocalStorage()) {localStorage.setItem(setting, minutes);}
   }
 
   setDefaults() {
@@ -188,9 +203,12 @@ class App extends Component {
     this.setState(defaults);
     const settings = defaults.settings;
     // Set Local Storage to Default Values
-    for (var key in settings) {
-      localStorage.setItem(key, settings[key]);
+    if (this.checkLocalStorage()) {
+      for (var key in settings) {
+        localStorage.setItem(key, settings[key]);
+      }
     }
+
   }
 
   // Update State for ActiveMode(Pomodoro, Short, Long) and Displayed Timer
