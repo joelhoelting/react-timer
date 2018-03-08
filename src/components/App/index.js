@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Raven from 'raven-js';
 // Radium for Component Styles
 import Radium, {StyleRoot, Style} from 'radium';
 // Header
@@ -13,6 +14,7 @@ import Settings from './Modal/Settings';
 // Audio Files
 import AudioFiles from './AudioFiles';
 
+Raven.config('https://98787a50be8945f5a2108bd3710f303f@sentry.io/300185').install();
 
 class App extends Component {
   constructor() {
